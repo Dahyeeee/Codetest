@@ -1,3 +1,4 @@
+//unsolved
 function solution(board, moves){
     let basket = [];
     const newMoves = moves.map((item)=>item-1);
