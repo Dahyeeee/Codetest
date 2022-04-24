@@ -16,4 +16,9 @@ function solution(arr, n){
   return newArr;
 }
 
-console.log(solution(['car','bed','sun'],2));
+console.log(solution2(['car','bed','sun'],2));
+
+function solution2(arr, n ){
+  let newArr = arr.map((a)=>a[n]);
+  console.log(newArr)
+}
