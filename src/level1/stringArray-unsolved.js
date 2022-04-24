@@ -4,21 +4,27 @@
 
 function solution(arr, n){
   let newArr=[];
-  let obj ={};
+  let map = new Map();
   for( let i =0; i<arr.length ; i++){
-      obj[arr[i].slice(n)] = arr[i];
+      map.set(arr[i],arr[i].slice(n));
+      newArr.push(arr[i].slice(n));
   }
-  console.log(obj);
-  let order = Object.keys(obj).sort();
-  for(let i=0; i<arr.length ; i++){
-      newArr.push(obj[order[i]])
+  let result =[]
+  console.log(map,newArr);
+  let order = newArr.sort();
+  for(thing of map){
+    for(word of newArr){
+      if(word === map.get(thing)){
+        result.push(map.keys(thing))
+      }
+    }
   }
-  return newArr;
+  return result;
 }
 
-console.log(solution2(['car','bed','sun'],2));
+console.log(solution(["ae","be","ce","ae"],1));
 
 function solution2(arr, n ){
-  let newArr = arr.map((a)=>a[n]);
+  let newArr = arr.map((a)=>a[n]).sort();
   console.log(newArr)
 }
