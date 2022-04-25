@@ -1,4 +1,4 @@
-//others try again later
+//I tried twice but didn't solve it. try again later.
 
 function solution(N, stages){
     let result = [];

@@ -27,3 +27,21 @@ function others(lottos, win_nums) {
 
     return [rank[maxCount], rank[minCount]];
 }
+
+//혼자 다시 푼거 
+//filter와 length를 이용하면 더 간단하게 할 수 있음..
+function solution(lottos, win_nums) {
+    const rank = [6,6,5,4,3,2,1];
+    let theLeast =0;
+    for(num of lottos){
+        if(win_nums.includes(num)) {theLeast ++}
+    }
+    let theMost = theLeast;
+    for(num of lottos){
+        if(num === 0) {theMost ++}
+    }
+    let result=[];
+        result.push(rank[theMost]);
+        result.push(rank[theLeast]);
+    return result
+}

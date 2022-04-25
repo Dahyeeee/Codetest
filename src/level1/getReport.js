@@ -1,8 +1,10 @@
+//haven't done by myself
 function getReport(id_list, report, k){
     let reports = [...new Set(report)].map(a=>{return a.split(' ')});
     let counts = new Map();
     for (const bad of reports){
         //get(bad[1]+1||1 이 무슨 뜻이징..
+        //counts.get(bad[1])이 있으면 가져와서 1을 더하고, 없으면 그냥 1을 넣으라는 거구나.
         counts.set(bad[1],counts.get(bad[1])+1||1)
     }
     let good = new Map();
