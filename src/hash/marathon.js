@@ -26,6 +26,7 @@ function solution(participant, completion) {
         let a = participant[i], 
             b = completion[i];
         // 이부분 이해 안감.
+        // map.get(a)가 있으면 있는 거 쓰고 없으면 0을 쓰라는 거임
         map.set(a, (map.get(a) || 0) + 1);
         map.set(b, (map.get(b) || 0) - 1);
     }

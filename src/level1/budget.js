@@ -18,7 +18,7 @@ function solution(d,budget){
 
 console.log(solution([1,3,2,5,5,4],9))
 
-//내가 원하던건데!
+//내가 원하던건데! -still hard to think up this logic
 function solution(d, budget) {
     let answer = 0;
     let money = 0;

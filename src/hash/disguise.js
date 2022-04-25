@@ -1,7 +1,7 @@
 function disguise(clothes){
  let spyWear ={};
  for(let clothtype of clothes){
-     if(spyWear[clothtype[1]]===undefined) spyWear[clothtype[1]] = []
+     if(!spyWear[clothtype[1]]) spyWear[clothtype[1]] = []
      spyWear[clothtype[1]].push(clothtype[0])
  }
  const clothesCount = [];

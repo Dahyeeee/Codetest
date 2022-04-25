@@ -13,6 +13,7 @@ console.log(removeSmallest([5,6,9,1,5]))
 
 
 //...arr 하면 뭐가 되는거지?
+//arr안의 요소를 다 펼쳐줌.
 function solution(arr) {
     arr.splice(arr.indexOf(Math.min(...arr)),1);
     if(arr.length<1)return[-1];

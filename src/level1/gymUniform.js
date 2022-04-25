@@ -4,7 +4,7 @@ function solution(n, lost, reserve){
     let newReserve = reserve.sort((a,b)=>a-b);
     for(item of newLost){
         if(newReserve.includes(item)){
-            result += 1;
+            result += 1
         }
     }
     newLost =newLost.filter((item)=> !newReserve.includes(item));
