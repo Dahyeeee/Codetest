@@ -1,3 +1,4 @@
+//정규표현식을 잘 익히면 할 수 있는 문제..아마도
 function solution(new_id) {
     const answer = new_id
         .toLowerCase() // 1
