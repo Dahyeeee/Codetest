@@ -1,4 +1,4 @@
-//other's
+//other's need to try again later
 function solution(s) {
     var answer = 0;
     let lengthArr = []
