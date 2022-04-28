@@ -5,7 +5,7 @@ function solution(cacheSize, cities){
     let answer =0;
     cities = cities.map(a =>a.toUpperCase())
     let cache = [];
-    for(city of cities){
+    cities.forEach((city)=>{
         if(!cache.includes(city)){
             answer +=5;
             if(cache.length<cacheSize) {
@@ -19,7 +19,7 @@ function solution(cacheSize, cities){
             cache = cache.filter(a=>a !== city);
             cache.push(city);
         }
-    }
+    })
     return answer;
 }
 
