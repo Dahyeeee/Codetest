@@ -1,4 +1,4 @@
-//other's haven't understood yet
+//other's understood but don't think i can implement this.
 function solution(places) {
     var answer = [];
     answer = places.map(place => {
