@@ -1,9 +1,25 @@
-//뭔가 하긴 했는데 문제 이해를 잘 못한 듯. 
-function solution(orders,course){
-    let tempMenu = orders.join('');
-    const menus = [...new Set(tempMenu)];
-    console.log(menus)
-    const possibleCombos =[];
+//did it! combine은 내가 한거 아니지만~ object idea 가져와서 했당
+function solution1(orders, course){
+    const ordersArr = orders.map((a) =>a.split('').sort());
+    
+    console.log(ordersArr);
+    let popularCombo=[]
+    for(let num of course){
+        const combos ={};
+        for(let order of ordersArr){
+            let combis = combine(order, num);
+            for(let combi of combis) combos[combi] = (combos[combi]||0) +1
+        }
+        let max=1
+        
+        for(let value of Object.values(combos)){
+            if(value>max) max= value
+        }
+        for(let [key,value] of Object.entries(combos)){
+            if(value===max && max>1) popularCombo.push(key.split(',').join(''))
+        }
+        console.log(combos, popularCombo);
+    }
 
     function combine(array, length) {
         if(length ===1) return array.map((v)=>[v]);
@@ -14,25 +30,9 @@ function solution(orders,course){
             const attached = combination.map((combi)=>[v,...combi]);
             result.push(...attached);
         })
-        return checkOrderNumber(result);
+        return result;
     }
-    
-    function checkOrderNumber(combos){
-        let result = combos.filter((combo)=>{
-            let count =0;
-            for(let order of orders){
-                if(combo.every((a)=>order.includes(a))) count++
-                if(count >=2) return combo 
-        }
-    })
-    return result;
-  }
-    const answer=[];
-    for( num of course){
-       answer.push(...combine(menus, num));
-    }
-    const finalAnswer = answer.map((a)=>a.join(''))
-    return finalAnswer.sort();
+    return popularCombo.sort()
 }
 
-console.log(solution(["AC", "CD", "ADE", "XYZ", "XYZ", "AD"],[2,3,5]))
+console.log(solution1(["ABCFG", "AC", "CDE", "ACDE", "BCFG", "ACDEH"],[2,3,4]))
