@@ -45,3 +45,56 @@ function solution(numbers, hand){
     function distanceBtwnLocation(a,b){
         return Math.abs(a[0]-b[0])+Math.abs(a[1]-b[1]);
     }
+
+    //mine
+    function mine(numbers,hand){
+        let leftHand = 10;
+        let rightHand= 12;
+        let answer =[];
+        for(num of numbers){
+            if(num==0) num= 11;
+            if(num%3==1){
+                leftHand =num;
+                answer.push('L');
+            }
+            if(num%3===0){
+                rightHand= num;
+                answer.push('R');
+            }
+            else{
+                let location = getlocation(num);
+                let leftLocation = getlocation(leftHand);
+                let rightLocation = getlocation(rightHand);
+                const distanceLeft = getDistance(leftLocation,location);
+                const distanceRight = getDistance(rightLocation,location);
+                if(distanceLeft>distanceRight){
+                    rightHand = num;
+                    answer.push('R')
+                }
+                else if(distanceLeft<distanceRight){
+                    leftHand =num;
+                    answer.push('L')
+                }
+                else { 
+                    if(hand==='right'){
+                        rightHand= num;
+                        answer.push('R');
+                    }else{
+                        leftHand =num;
+                        answer.push('L');
+                    }
+                }
+            }
+        }
+        return answer.join('');
+    }
+
+    function getlocation(num){
+        return [Math.floor(num-1)/3,(num-1)%3]
+    }
+
+    function getDistance(finger, num){
+        return Math.abs(finger[0]-num[0])+Math.abs(finger[1]-num[1])
+    }
+
+    console.log(mine([1, 2, 3, 4, 5, 6, 7, 8, 9, 0],'right'))

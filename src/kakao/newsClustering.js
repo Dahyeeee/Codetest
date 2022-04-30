@@ -15,17 +15,23 @@ function solution(str1,str2){
     console.log(pairArr1)
     const finalArr1= pairArr1.filter((item)=> item.match(/^\w+$/||/^\d+$/));
     const finalArr2= pairArr2.filter((item)=> item.match(/^\w+$/||/^\d+$/));
-    console.log(finalArr1,finalArr2)
-    let commonwords = 0;
-    for(words of finalArr2){
-        if(finalArr1.includes(words)) commonwords ++;
+    const union = new Set([...finalArr1,...finalArr2]);
+    console.log(finalArr1,finalArr2,union)
+    let commonAtLeast = 0;
+    let commonAtMost =0;
+    for(slice of union){
+        let a= finalArr1.filter(x=>x===slice).length;
+        let b= finalArr2.filter(x=>x===slice).length;
+        commonAtLeast += Math.min(a,b);
+        commonAtMost += Math.max(a,b);
     }
-    console.log(commonwords)
-    let result = commonwords/(finalArr2.length + finalArr1.length-commonwords)*65536
-    if(result === NaN) {return 65536} else{ return Math.floor(result)}
+    console.log(commonAtLeast,commonAtMost);
+    if(commonAtLeast==0) return 65536;
+    let result = (commonAtLeast/commonAtMost)*65536
+    return result === NaN ? 65536 : Math.floor(result)
 }
 
-//console.log(solution("aa1+aa2",'AAAA12'))
+//console.log(solution(E=M*C^2,'AAAA12'))
 
 //i haven't understood this. will check later~
 //other's 근접하게 간거 같은데 ㅎㅅㅎ 함수 안에 함수쓰는 거 익숙해져야겠당~~
@@ -57,4 +63,4 @@ function verifiedSlices(str) {
     return result
 }
 
-console.log(solution2('aa1+aa2','aaaa12'))
+console.log(solution('E=M*C^2','e=m*c^2'))
