@@ -1,31 +1,29 @@
-//unsolved
+//it kinda worked. can't pass few tests
 function solution(board, moves){
-    let basket = [0];
+    let basket = [];
     let result =0;
     const newMoves = moves.map((item)=>item-1);
+    //basket에 뽑은 인형을 넣어놈
     for(let move of newMoves){
         const toyrow = board.find(item=> item[move] !== 0);
         if(toyrow !== undefined) {
             basket.push(toyrow[move])
             toyrow[move] = 0;
-            
-           // if(basket[-1] === basket[-2]) basket.pop(); basket.pop();
-            result +=2
-         //   break;
-      }  }
-     
-      console.log(basket);
-    // function removeToy(){
-    //     for(let i=1; i<=basket.length ; i++){
-    //         if(basket[i] === basket[i-1]){
-    //             result +=2
-    //             basket = basket.filter(item=>item != basket[i]);
-    //             //console.log(basket);
-    //             removeToy();
-    //         }
-    //     }
-    // }
-    // removeToy();
+        }
+    }
+    console.log(basket);
+    function removeToy(basket){
+       let basket1 = [...basket]
+        for(let i =1; i<basket1.length-1 ; i++){
+            if(basket1[i]===basket1[i-1]){
+                result +=2;
+                basket1.splice(i-1,2);
+                removeToy(basket1)
+            }
+           console.log(basket1)
+        }
+    }
+    removeToy(basket);
     console.log(result);
     return result;
 }
