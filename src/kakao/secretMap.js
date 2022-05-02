@@ -1,15 +1,28 @@
-//try agian
+//I did it
 function solution(n, arr1, arr2){
-    let result=[];
-    console.log(newArr1, newArr2)
-    for(let i =0 ; i<n ; i++){
-        // '|'는 둘중 하나가 1일 때 1로 모두를 바꾸는 기능...
-        let row = (arr1[i]|arr2[i]).toString(2).padStart(n,'0').split('');
-        let newRow = row.map((a)=> a==='1'? '#' : ' ');
-        //row.replace(/0/g,' ').replace(/1/g,'#')으로 할수도있음. string일때
-        result.push(newRow.join(''));
-        console.log(row); 
+    function changeNum(arr){
+        return arr.map((a)=> a.toString(2).padStart(n,0).split(''))
     }
+
+    const newArr1 = changeNum(arr1);
+    const newArr2 = changeNum(arr2);
+    console.log(newArr1)
+    let resultArr = [];
+    //I don't like this part. any better idea? 
+    for(let i =0; i<n ;i++){
+        for(let j=0; j<n ; j++){
+        // a|b 는 둘 중 1이 있다면 1을 반환함
+        resultArr.push(newArr1[i][j]|newArr2[i][j])
+        }
+        resultArr.push('/')
+    }
+    let result = resultArr.map((a)=>{
+        if(a ===1 ) return '#'
+        if(a ===0 ) return ' '
+        else return '/'
+    })
+    result = result.join('').split('/').filter(a =>a !='')
+    console.log(result);
     return result;
 }
 

@@ -1,18 +1,17 @@
-//try again later
+//I did it :)
 function solution(record){
-    let answer = [];
-    let users ={}
-    record.forEach(history =>{
-        const[action , id, name] = history.split(' ')
-        if(action !== 'Leave') users[id] = name
-    });
-    console.log(users)
-    record.forEach(history =>{
-        const[action, id, name] =history.split(' ');
-        if(action == 'Enter') answer.push(`${users[id]}님이 들어왔습니다.`)
-        if(action == 'Leave') answer.push(`${users[id]}님이 나갔습니다.`)
+    const newRecord = record.map(each => each.split(' '))
+    let records ={};
+    for(each of newRecord){
+        if(each[0] != 'Leave') records[each[1]] = each[2]
+    }
+    let result=[];
+    newRecord.forEach((a)=>{
+        if(a[0]==='Enter') result.push(`${records[a[1]]}님이 들어왔습니다.`)
+        else if(a[0]==='Leave') result.push(`${records[a[1]]}님이 나갔습니다.`)
     })
-    return answer;
+    console.log(records)
+    return result;
 }
 
 console.log(solution(["Enter uid1234 Muzi", "Enter uid4567 Prodo",

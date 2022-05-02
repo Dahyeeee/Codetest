@@ -44,5 +44,28 @@ function solution(info, query){
     return result;
 }
 
-console.log(solution(["java backend junior pizza 150","python frontend senior chicken 210","python frontend senior chicken 150","cpp backend senior pizza 260","java backend junior chicken 80","python backend senior chicken 50"],
+console.log(secondTry(["java backend junior pizza 150","python frontend senior chicken 210","python frontend senior chicken 150","cpp backend senior pizza 260","java backend junior chicken 80","python backend senior chicken 50"],
 ["java and backend and junior and pizza 100","python and frontend and senior and chicken 200","cpp and - and senior and pizza 250","- and backend and senior and - 150","- and - and - and chicken 100","- and - and - and - 150"]))
+
+function secondTry(info, query){
+  const newInfo =info.map(a => a.split(' ').join()).map((a)=>{
+      let index = a.match(/\d+/)
+      return [a.replace(/\d+/,'').split(',') ,+index[0]]
+  })
+  const newQuery = query.map(a=>a.split(' '))
+                        .map(a => a.filter(b => b!= 'and'&& b !='-').join())
+                        .map((a)=>{
+                            let index = a.match(/\d+/);
+                            return [a.replace(/\d+/,'').split(','),+index[0]]
+                        })
+  console.log(newInfo, newQuery)
+  let result =[]
+  for(let query of newQuery){
+      let count =0;
+      for(let info of newInfo){
+          if(info[0].includes(...query[0]) && info[1] >= query[1]) count++
+      }
+      result.push(count)
+  }
+  return result;
+}

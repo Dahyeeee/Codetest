@@ -1,20 +1,25 @@
-//haven't done by myself
+//I did it with tiny little help at the end.
 function getReport(id_list, report, k){
-    let reports = [...new Set(report)].map(a=>{return a.split(' ')});
-    let counts = new Map();
-    for (const bad of reports){
-        //get(bad[1]+1||1 이 무슨 뜻이징..
-        //counts.get(bad[1])이 있으면 가져와서 1을 더하고, 없으면 그냥 1을 넣으라는 거구나.
-        counts.set(bad[1],counts.get(bad[1])+1||1)
+    let newReport = report.map(each => each.split(' '));
+    let reported = new Map()
+    for(let reports of newReport){
+        reported.set(reports[1], reported.get(reports[1])+1||1)
     }
-    let good = new Map();
-    for(const report of reports){
-        if(counts.get(report[1])>=k){
-            good.set(report[0],good.get(report[0])+1||1)
+    console.log(reported)
+    let reporting = new Map()
+    for(const [key,value] of reported.entries()){
+        if(value>=k) {
+            newReport.forEach((a)=>{
+            if(a[1]=== key) reporting.set(a[0], reporting.get(a[0])+1||1); 
+            })
         }
     }
-    let answer = id_list.map(a=>good.get(a)||0)
-    return answer;
+    const result = id_list.map((a)=> reporting.get(a)||0)
+    
+    console.log(reporting)
+    return result;
 }
 
 console.log(getReport(["muzi", "frodo", "apeach", "neo"],["muzi frodo","apeach frodo","frodo neo","muzi neo","apeach muzi"],2))
+
+//
