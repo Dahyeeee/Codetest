@@ -1,4 +1,5 @@
 //it works. 'replaceAll'function doesn't work at programmers.. so i can't pass.
+//C#을 하나로 묶게 배열로 나누는 방법이 뭐지?
 function solution(m, musicinfos){
     var answer = '';
     const musicInfor = musicinfos.map((a) =>a.split(','))
