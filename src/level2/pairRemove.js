@@ -1,13 +1,13 @@
-//unsolved
+//solved.
 function solution(s){
-    let sArr = s.split('')
-    for(let i=1 ; i <s.length ; i++){
-        if(sArr[i] == sArr[i-1])
-        sArr = sArr.filter((item,index)=> index !== i && index !== i-1);
-        console.log(sArr)
+    //s가 홀수일 때 바로 0 출력해줌
+    if(s.length%2 != 0 ) return 0;
+    let array =[];
+    for(let i=0; i<=s.length; i++){
+        if(array[array.length-1]===s[i]) array.pop();
+        else array.push(s[i])
     }
-    if(sArr.length == 0) return 1 
-    else return 0
+    return array.length ===0 ? 1 : 0
 }
 
 console.log(solution('babbaba'))
