@@ -1,4 +1,4 @@
-//isPrime 뭐야? 뭐야..? test하나 빼고 다 통과함.
+//I did it
 function solution(n,k){
     const newN = n.toString(k);
     const newNArr = newN.split(/0+/).filter(a=>a !=='1' && a !=='');
