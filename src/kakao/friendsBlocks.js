@@ -1,56 +1,58 @@
-//unsolved hardy solved.
-function turn(m,n,board,answer){
-    const boardArray = board.map(a=>a.split(''));
+//I'm quite close. but it's pretty mess...!
+function solution(m, n, board){
+    board = board.map(el => el.split(''));
     
-    let removeItem = []
-    for(let i =0; i <n-1 ; i ++){
-        for(let j =0; j <m-1 ; j++){
-            let item = boardArray[j][i];
-            if(item === '0') continue;
-            let bottonRight = boardArray[j+1][i+1];
-            let botton = boardArray[j+1][i];
-            let right = boardArray[j][i+1];
-            if(item === bottonRight && item=== botton && item ===right){
-                removeItem.push(`${j},${i}`)
-                removeItem.push(`${j},${i+1}`)
-                removeItem.push(`${j+1},${i}`)
-                removeItem.push(`${j+1},${i+1}`)       
+    while(true){
+        let breakList =[];
+        for(let i=0 ; i<m-1 ; i++){
+            for(let j =0; j< n-1; j++){
+                if(board[i][j] != ''
+                && board[i][j]==board[i][j+1]
+                && board[i+1][j]==board[i+1][j+1]
+                && board[i][j]==board[i+1][j])
+                breakList.push([i, j]);
             }
         }
-    }
-    console.log(removeItem)
-    removeItem =Array.from(new Set(removeItem))
-    console.log(removeItem.length)
-    if (removeItem.length >0){
-        answer += removeItem.length;
-        removeItem.forEach(i =>{
-            let y = +(i.split(',')[0])
-            let x = +(i.split(',')[1])
-            boardArray[y][x]='0';
-        });
-        for (let i =1; i <m; i++){
-            for(let j =0; j<n ; j++){
-                let flag = true;
-                let sY =i;
-                let sX =j;
-              //  while(sY>0){
-                    if(boardArray[sY][sX]==='0'){
-                        boardArray[sY][sX]= boardArray[sY-1][sX];
-                        board[sY-1][sX] ='0'
-                    }
-                    sY --;
+        console.log(breakList)
+        if(breakList.length ==0 ) break;
+        
+        //같은 블럭자리를 비워주기
+        for(let i=0; i<breakList.length; i++){
+            board[breakList[i][0]][breakList[i][1]] = '';
+            board[breakList[i][0]+1][breakList[i][1]] = '';
+            board[breakList[i][0]][breakList[i][1]+1] = '';
+            board[breakList[i][0]+1][breakList[i][1]+1] = '';
+        }
+
+       // 중력으로 내려주기
+       // problem here.    
+        for(let i=0 ; i<n ; i++){
+            let emptySpace=0;
+            for(let j =m-1; j>=0 ; j--){
+                if(board[j][i]==''){
+                    emptySpace++
                 }
-            }
+                else{
+                    if(emptySpace != 0){
+                        for(k= j ; k>=0 ; k--){
+                            board[k+emptySpace][i] =board[k][i];
+                        }
+                        for(let q=0 ; q<emptySpace ; q++){
+                            board[q][i] =''
+                        }
+                         emptySpace =0;
+                    }
+                }
+            } console.log(emptySpace)
         }
-        answer =turn(m, n, board, answer);
     }
-    return answer;
+    console.log(board)
+    let count =0;
+    board.forEach(a=> a.forEach(b =>{
+        if(b==='') count++
+    }))
+    return count;
 }
-
-function solution(m,n,board){
-    let answer =0;
-    answer = turn(m,n,board,answer);
-    return answer;
-}
-
-console.log(solution(4,5,["CCBDE", "AAADE", "AAABF", "CCBBF"]))
+let a =["AABBEE","AAAEEE","VAAEEV","AABBEE","AACCEE","VVCCEE" ]
+console.log(solution(6,6,["AABBEE","AAAEEE","VAAEEV","AABBEE","AACCEE","VVCCEE" ]))
+console.log(a.map((a)=>a.split('')))
