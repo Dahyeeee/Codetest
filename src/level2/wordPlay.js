@@ -59,4 +59,5 @@ function others(n, words){
     return [0,0]
 }
 
-console.log(others(2,['land', 'dream', 'mom', 'mom']));
+console.log(secondTry(2,['land', 'dream', 'mom', 'mom']));
+
